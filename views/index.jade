@@ -1,5 +1,35 @@
-extends layout
+doctype html
 
-block content
-  h1= title
-  p Welcome to #{title}
+html(ng-app='myApp')
+
+  head
+    link(rel='stylesheet',href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet',href='/css/style.css')
+
+  body
+    h1 h1 test {{100+2}}
+
+    div(ng-controller='mainCtrl')
+      .jumbotron.text-center
+        h1 Todo
+          span.label.label-info {{todos.length}}
+
+      .panel.panel-default
+        .panel-body
+          .row
+            .col-sm-4.col-sm-offset-4
+              div.checkbox(ng-repeat='todo in todos')
+                label
+                  input(type='checkbox', ng-click='deleteTodo(todo._id)')
+                  |  {{todo.text}}
+          .row
+            .col-sm-8.col-sm-offset-2.text-center
+              form
+                .form-group
+                  label Todos
+                  input.form-control(type='text',ng-model='formData.text')
+                .form-group
+                  button.btn.btn-primary(type='submit',ng-click='createTodo()') Add
+
+    script(src='/bower_components/angular/angular.min.js')
+    script(src='/js/app.js')
